@@ -1,29 +1,345 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import "tailwindcss";
 
-@layer utilities {
+
+@theme {
+  /* Base Colors */
+  --color-grey-0: #FFFFFF;
+  --color-grey-5: #F9FAFB;
+  --color-grey-10: #F3F4F6;
+  --color-grey-20: #E5E7EB;
+  --color-grey-30: #D1D5DB;
+  --color-grey-40: #9CA3AF;
+  --color-grey-50: #6B7280;
+  --color-grey-60: #4B5563;
+  --color-grey-70: #374151;
+  --color-grey-80: #1F2937;
+  --color-grey-90: #111827;
+
+  /* Border Radius */
+  --radius-none: 0px;
+  --radius-soft: 2px;
+  --radius-base: 4px;
+  --radius-rounded: 8px;
+  --radius-large: 16px;
+  --radius-circle: 9999px;
+
+  /* Typography */
+  --font-sans: 'Quicksand', var(--font-geist-sans), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --font-outfit: 'Outfit', sans-serif;
+  --font-quicksand: 'Quicksand', sans-serif;
+
+
+  /* Keyframe Animations */
+  --animation-ring: ring-3 2.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  --animation-fade-in-right: fade-in-right 0.3s cubic-bezier(0.5, 0, 0.5, 1) forwards;
+  --animation-fade-in-top: fade-in-top 0.2s cubic-bezier(0.5, 0, 0.5, 1) forwards;
+  --animation-fade-out-top: fade-out-top 0.2s cubic-bezier(0.5, 0, 0.5, 1) forwards;
+  --animation-accordion-open: accordion-slide-down 300ms cubic-bezier(0.87, 0, 0.13, 1) forwards;
+  --animation-accordion-close: accordion-slide-up 300ms cubic-bezier(0.87, 0, 0.13, 1) forwards;
+  --animation-enter: enter 200ms ease-out;
+  --animation-slide-in: slide-in 1.2s cubic-bezier(.41, .73, .51, 1.02);
+  --animation-leave: leave 150ms ease-in forwards;
+
+  /* Screen sizes */
+  --screen-2xsmall: 320px;
+  --screen-xsmall: 512px;
+  --screen-small: 1024px;
+  --screen-medium: 1280px;
+  --screen-large: 1440px;
+  --screen-xlarge: 1680px;
+  --screen-2xlarge: 1920px;
+}
+
+/* Compatibility layer for v4 border color behavior */
+@layer base {
+
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  body {
+    font-family: var(--font-family-sans);
+  }
+}
+
+/* @screen 2xsmall {
+  Styles for 320px and above
+} */
+
+/* @screen xsmall {
+  Styles for 512px and above
+} */
+
+/* @screen small {
+  Styles for 1024px and above
+} */
+
+/* @screen medium {
+  Styles for 1280px and above
+} */
+
+/* @screen large {
+  Styles for 1440px and above
+} */
+
+/* @screen xlarge {
+  Styles for 1680px and above
+} */
+
+/* @screen 2xlarge {
+  Styles for 1920px and above
+} */
+
+/* Custom utilities from your config */
+@utility no-scrollbar {
+
   /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
 
-  .no-scrollbar::-webkit-scrollbar-track {
+  &::-webkit-scrollbar-track {
     background-color: transparent;
   }
 
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+@utility content-container {
+  max-width: 1440px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@utility contrast-btn {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 9999px;
+  transition-property: color, background-color;
+  transition-duration: 200ms;
+  transition-timing-function: ease-in;
+
+  &:hover {
+    background-color: black;
+    color: white;
+  }
+}
+
+/* Text utilities from your existing globals.css */
+@utility text-xsmall-regular {
+  font-size: 10px;
+  line-height: 1rem;
+  font-weight: 400;
+}
+
+@utility text-small-regular {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 400;
+}
+
+@utility text-small-semi {
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  font-weight: 600;
+}
+
+@utility text-base-regular {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+@utility text-base-semi {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+@utility text-large-regular {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+@utility text-large-semi {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 600;
+}
+
+@utility text-xl-regular {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  font-weight: 400;
+}
+
+@utility text-xl-semi {
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+  font-weight: 600;
+}
+
+@utility text-2xl-regular {
+  font-size: 1.875rem;
+  line-height: 3rem;
+  font-weight: 400;
+}
+
+@utility text-2xl-semi {
+  font-size: 1.875rem;
+  line-height: 3rem;
+  font-weight: 600;
+}
+
+@utility text-3xl-regular {
+  font-size: 2rem;
+  line-height: 2.75rem;
+  font-weight: 400;
+}
+
+@utility text-3xl-semi {
+  font-size: 2rem;
+  line-height: 2.75rem;
+  font-weight: 600;
+}
+
+/* Keyframe Animations */
+@keyframes ring {
+  0% {
+    transform: rotate(0deg);
   }
 
-  input:focus ~ label,
-  input:not(:placeholder-shown) ~ label {
-    @apply -translate-y-2 text-xsmall-regular;
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(10px);
   }
 
-  input:focus ~ label {
-    @apply left-0;
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in-top {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-out-top {
+  0% {
+    height: 100%;
+  }
+
+  99% {
+    height: 0;
+  }
+
+  100% {
+    visibility: hidden;
+  }
+}
+
+@keyframes accordion-slide-up {
+  0% {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+
+  100% {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes accordion-slide-down {
+  0% {
+    min-height: 0;
+    max-height: 0;
+    opacity: 0;
+  }
+
+  100% {
+    min-height: var(--radix-accordion-content-height);
+    max-height: none;
+    opacity: 1;
+  }
+}
+
+@keyframes enter {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes leave {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Form element styles from your existing globals.css */
+@layer utilities {
+
+  input:focus~label,
+  input:not(:placeholder-shown)~label {
+    transform: translateY(-0.5rem);
+    font-size: 10px;
+    line-height: 1rem;
+  }
+
+  input:focus~label {
+    left: 0;
   }
 
   input:-webkit-autofill,
@@ -49,64 +365,36 @@
   }
 }
 
-@layer components {
-  .content-container {
-    @apply max-w-[1440px] w-full mx-auto px-6;
+/* Max width extension */
+@layer utilities {
+  .max-w-8xl {
+    max-width: 100rem;
+  }
+}
+
+/* Transition property extensions */
+@layer utilities {
+  .transition-width {
+    transition-property: width, margin;
   }
 
-  .contrast-btn {
-    @apply px-4 py-2 border border-black rounded-full hover:bg-black hover:text-white transition-colors duration-200 ease-in;
+  .transition-height {
+    transition-property: height;
   }
 
-  .text-xsmall-regular {
-    @apply text-[10px] leading-4 font-normal;
+  .transition-bg {
+    transition-property: background-color;
   }
 
-  .text-small-regular {
-    @apply text-xs leading-5 font-normal;
+  .transition-display {
+    transition-property: display, opacity;
   }
 
-  .text-small-semi {
-    @apply text-xs leading-5 font-semibold;
+  .transition-visibility {
+    transition-property: visibility;
   }
 
-  .text-base-regular {
-    @apply text-sm leading-6 font-normal;
-  }
-
-  .text-base-semi {
-    @apply text-sm leading-6 font-semibold;
-  }
-
-  .text-large-regular {
-    @apply text-base leading-6 font-normal;
-  }
-
-  .text-large-semi {
-    @apply text-base leading-6 font-semibold;
-  }
-
-  .text-xl-regular {
-    @apply text-2xl leading-[36px] font-normal;
-  }
-
-  .text-xl-semi {
-    @apply text-2xl leading-[36px] font-semibold;
-  }
-
-  .text-2xl-regular {
-    @apply text-[30px] leading-[48px] font-normal;
-  }
-
-  .text-2xl-semi {
-    @apply text-[30px] leading-[48px] font-semibold;
-  }
-
-  .text-3xl-regular {
-    @apply text-[32px] leading-[44px] font-normal;
-  }
-
-  .text-3xl-semi {
-    @apply text-[32px] leading-[44px] font-semibold;
+  .transition-padding {
+    transition-property: padding-top, padding-right, padding-bottom, padding-left;
   }
 }
